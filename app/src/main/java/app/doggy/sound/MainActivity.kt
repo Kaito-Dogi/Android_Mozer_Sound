@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +15,22 @@ class MainActivity : AppCompatActivity() {
             R.raw.hairdryer,
             R.raw.vacuum,
             R.raw.water
+    )
+
+    //画像の配列。
+    private val images: Array<Int> = arrayOf(
+            R.drawable.vinyl,
+            R.drawable.hairdryer,
+            R.drawable.vacuum,
+            R.drawable.water
+    )
+
+    //暗い画像の配列。
+    private val darkImages: Array<Int> = arrayOf(
+            R.drawable.vinyl_dark,
+            R.drawable.hairdryer_dark,
+            R.drawable.vacuum_dark,
+            R.drawable.water_dark
     )
 
     //再生状況を管理する配列。
@@ -39,21 +56,58 @@ class MainActivity : AppCompatActivity() {
         }
 
         //クリックリスナを設定。
-        vinylImage.setOnClickListener {
-            soundPlay(0)
+        vinylImage.setOnTouchListener { view, event ->
+
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                vinylImage.setImageResource(darkImages[0])
+
+            } else if(event.action == MotionEvent.ACTION_UP) {
+                soundPlay(0)
+                vinylImage.setImageResource(images[0])
+
+            }
+            true
         }
 
-        hairdryerImage.setOnClickListener {
-            soundPlay(1)
+        hairdryerImage.setOnTouchListener { view, event ->
+
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                hairdryerImage.setImageResource(darkImages[1])
+
+            } else if(event.action == MotionEvent.ACTION_UP) {
+                soundPlay(1)
+                hairdryerImage.setImageResource(images[1])
+
+            }
+            true
         }
 
-        vacuumImage.setOnClickListener {
-            soundPlay(2)
+        vacuumImage.setOnTouchListener { view, event ->
+
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                vacuumImage.setImageResource(darkImages[2])
+
+            } else if(event.action == MotionEvent.ACTION_UP) {
+                soundPlay(2)
+                vacuumImage.setImageResource(images[2])
+
+            }
+            true
         }
 
-        waterImage.setOnClickListener {
-            soundPlay(3)
+        waterImage.setOnTouchListener { view, event ->
+
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                waterImage.setImageResource(darkImages[3])
+
+            } else if(event.action == MotionEvent.ACTION_UP) {
+                soundPlay(3)
+                waterImage.setImageResource(images[3])
+
+            }
+            true
         }
+
     }
 
     //音声を再生する処理。
